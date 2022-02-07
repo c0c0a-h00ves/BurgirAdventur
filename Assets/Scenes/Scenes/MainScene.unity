@@ -294,9 +294,45 @@ PolygonCollider2D:
       - {x: -0.07722567, y: -0.07283652}
       - {x: -0.004971519, y: -0.07283651}
       - {x: 0.06890271, y: -0.07283651}
-      - {x: 0.12812021, y: -0.068344235}
+      - {x: 0.11693442, y: -0.065547794}
       - {x: 0.12335406, y: 0.038902685}
       - {x: 0.05469664, y: 0.10612839}
+--- !u!114 &1007699064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007699059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d35c2909806505148a1e405950bd7777, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.1
+--- !u!1 &2133313171 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7482693941426834663, guid: a9d5b4b763e27a047b21ba4c50b0233d, type: 3}
+  m_PrefabInstance: {fileID: 7482693942313552500}
+  m_PrefabAsset: {fileID: 0}
+--- !u!143 &2133313172
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133313171}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1.6
+  m_Radius: 2.72
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &7482693942313552500
 PrefabInstance:
   m_ObjectHideFlags: 0
