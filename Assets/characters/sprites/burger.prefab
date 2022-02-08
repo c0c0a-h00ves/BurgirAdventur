@@ -158,3 +158,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e875054c35d72584eaa80863b6147979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDead: 0
+  thrust: 5
+  _timeToResetScene: 1

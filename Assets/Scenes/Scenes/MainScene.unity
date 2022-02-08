@@ -685,8 +685,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2105898840, guid: 1cfa3cc4d49e8fc4a8b3db1edd6ece71, type: 3}
-      propertyPath: thrust
-      value: 10
+      propertyPath: _timeToResetScene
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8566371187498732674, guid: 1cfa3cc4d49e8fc4a8b3db1edd6ece71, type: 3}
       propertyPath: m_RootOrder
