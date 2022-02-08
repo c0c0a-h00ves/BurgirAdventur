@@ -54,6 +54,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rectangle
       objectReference: {fileID: 0}
+    - target: {fileID: 7437323584598791006, guid: e606056367dcba24487b4b516e13ffce, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8790629961037350570, guid: e606056367dcba24487b4b516e13ffce, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -115,6 +119,10 @@ PrefabInstance:
     - target: {fileID: 7437323584598791006, guid: e606056367dcba24487b4b516e13ffce, type: 3}
       propertyPath: m_Name
       value: Rectangle (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437323584598791006, guid: e606056367dcba24487b4b516e13ffce, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8790629961037350570, guid: e606056367dcba24487b4b516e13ffce, type: 3}
       propertyPath: m_RootOrder
@@ -178,6 +186,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rectangle (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 7437323584598791006, guid: e606056367dcba24487b4b516e13ffce, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8790629961037350570, guid: e606056367dcba24487b4b516e13ffce, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -239,6 +251,10 @@ PrefabInstance:
     - target: {fileID: 7437323584598791006, guid: e606056367dcba24487b4b516e13ffce, type: 3}
       propertyPath: m_Name
       value: Rectangle (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437323584598791006, guid: e606056367dcba24487b4b516e13ffce, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8790629961037350570, guid: e606056367dcba24487b4b516e13ffce, type: 3}
       propertyPath: m_RootOrder
@@ -346,6 +362,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Square (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5779246972427397311, guid: fbb06fffa3822f543a378083f18aaaaa, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fbb06fffa3822f543a378083f18aaaaa, type: 3}
 --- !u!4 &593499624002311053 stripped
@@ -408,6 +428,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Square (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5779246972427397311, guid: fbb06fffa3822f543a378083f18aaaaa, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fbb06fffa3822f543a378083f18aaaaa, type: 3}
 --- !u!4 &593499622183060539 stripped
@@ -425,6 +449,10 @@ PrefabInstance:
     - target: {fileID: 7437323584598791006, guid: e606056367dcba24487b4b516e13ffce, type: 3}
       propertyPath: m_Name
       value: Rectangle (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437323584598791006, guid: e606056367dcba24487b4b516e13ffce, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8790629961037350570, guid: e606056367dcba24487b4b516e13ffce, type: 3}
       propertyPath: m_RootOrder
@@ -487,6 +515,10 @@ PrefabInstance:
     - target: {fileID: 7437323584598791006, guid: e606056367dcba24487b4b516e13ffce, type: 3}
       propertyPath: m_Name
       value: Rectangle (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437323584598791006, guid: e606056367dcba24487b4b516e13ffce, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8790629961037350570, guid: e606056367dcba24487b4b516e13ffce, type: 3}
       propertyPath: m_RootOrder
@@ -594,6 +626,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Square (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5779246972427397311, guid: fbb06fffa3822f543a378083f18aaaaa, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fbb06fffa3822f543a378083f18aaaaa, type: 3}
 --- !u!4 &593499622982514527 stripped
@@ -611,6 +647,10 @@ PrefabInstance:
     - target: {fileID: 7437323584598791006, guid: e606056367dcba24487b4b516e13ffce, type: 3}
       propertyPath: m_Name
       value: Rectangle (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437323584598791006, guid: e606056367dcba24487b4b516e13ffce, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8790629961037350570, guid: e606056367dcba24487b4b516e13ffce, type: 3}
       propertyPath: m_RootOrder
@@ -718,6 +758,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Square (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5779246972427397311, guid: fbb06fffa3822f543a378083f18aaaaa, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fbb06fffa3822f543a378083f18aaaaa, type: 3}
 --- !u!4 &593499622765441742 stripped
@@ -780,6 +824,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Square
       objectReference: {fileID: 0}
+    - target: {fileID: 5779246972427397311, guid: fbb06fffa3822f543a378083f18aaaaa, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fbb06fffa3822f543a378083f18aaaaa, type: 3}
 --- !u!4 &5278592007713281089 stripped
@@ -797,6 +845,10 @@ PrefabInstance:
     - target: {fileID: 7437323584598791006, guid: e606056367dcba24487b4b516e13ffce, type: 3}
       propertyPath: m_Name
       value: Rectangle (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437323584598791006, guid: e606056367dcba24487b4b516e13ffce, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8790629961037350570, guid: e606056367dcba24487b4b516e13ffce, type: 3}
       propertyPath: m_RootOrder
