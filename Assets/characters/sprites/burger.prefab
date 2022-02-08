@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1007699064}
   - component: {fileID: 6955999706974580846}
   - component: {fileID: 2105898840}
+  - component: {fileID: 5727290577841015619}
   m_Layer: 0
   m_Name: burger
   m_TagString: Untagged
@@ -119,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d35c2909806505148a1e405950bd7777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.02
+  speed: 5
 --- !u!61 &6955999706974580846
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -161,3 +162,18 @@ MonoBehaviour:
   isDead: 0
   thrust: 5
   _timeToResetScene: 1
+--- !u!114 &5727290577841015619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8566371187498732676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d12e7a29d95800447ba9b0a06a13ffe3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platformslayerMask:
+    serializedVersion: 2
+    m_Bits: 0
