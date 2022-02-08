@@ -6,6 +6,8 @@ public class burgier_movement : MonoBehaviour
     float horizontal_direction = 0f;
     float horizontal_move = 0f;
     Vector3 complete_move;
+    bool isAllowed_right = true;
+    bool isAllowed_left = true;
 
 // Zmienne ktore modyfikujemy my (w przyszlosci do beda stale)
 // serialize daje ze mozna zmieniac zmienna w komponencie skryptu
@@ -17,13 +19,13 @@ public class burgier_movement : MonoBehaviour
 
     void FixedUpdate(){
         Vector3 pozycja_temp = transform.position;
-        
-        //łapiemy x aktualnej pozycji (horizontal) i nakładamy na niego wykonany ruch
-        horizontal_move = pozycja_temp[0] + (horizontal_direction * speed);
 
-        //wrzucamy horizontal i vertical do nowego vectora, łącząc je w kompletny ruch
-        complete_move = new Vector3(horizontal_move, pozycja_temp[1]);
-        transform.position = complete_move;
-
+        horizontal_move = horizontal_direction * speed;
+      
+        complete_move = new Vector2(horizontal_move, 0f);
+        GetComponent<Rigidbody2D>().AddForce(complete_move );
+    
+    
     }
+
 }
