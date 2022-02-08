@@ -176,4 +176,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platformslayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
