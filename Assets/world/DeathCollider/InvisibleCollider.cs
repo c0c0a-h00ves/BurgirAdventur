@@ -7,7 +7,7 @@ public class InvisibleCollider : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        GameObject burger = GameObject.Find("burger");
+        GameObject burger = GameObject.Find("PlayerPrefab");
         if(collision.gameObject == burger)
         {
             Debug.Log("dead");
