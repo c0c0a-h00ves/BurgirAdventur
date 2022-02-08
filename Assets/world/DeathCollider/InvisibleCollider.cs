@@ -10,7 +10,10 @@ public class InvisibleCollider : MonoBehaviour
         GameObject burger = GameObject.Find("burger");
         if(collision.gameObject == burger)
         {
+            Debug.Log("dead");
             burger.GetComponent<burgier_death>().Death();
+            burger.GetComponent<burgier_death>().isDead = true;
         }
+        return;
     }
 }
