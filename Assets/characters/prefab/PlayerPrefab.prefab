@@ -125,12 +125,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d35c2909806505148a1e405950bd7777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  jumpVelocity: 200
-  platformslayerMask:
-    serializedVersion: 2
-    m_Bits: 512
-  m_MovementSmoothing: 0.05
+  moveSpeed: 10
+  direction: {x: 0, y: 0}
+  rb: {fileID: 7136336827888519565}
+  maxSpeed: 7
+  linerDrag: 4
 --- !u!1001 &8484571367451033561
 PrefabInstance:
   m_ObjectHideFlags: 0

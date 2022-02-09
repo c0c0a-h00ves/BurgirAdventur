@@ -2,50 +2,47 @@ using UnityEngine;
 
 public class burgier_movement : MonoBehaviour
 {
-// Zmienne ktore modyfikuje silnik
-    float horizontal_direction = 0f;
-    float horizontal_move = 0f;
-    Vector3 complete_move;
-    private Rigidbody2D rigidbody2d;
-    private BoxCollider2D boxCollider2d;
-    float jump;
+    [Header("Horizontal Movment")]
+    public float moveSpeed = 10f;
+    public Vector2 direction;
 
-// Zmienne ktore modyfikujemy my (w przyszlosci do beda stale)
-// serialize daje ze mozna zmieniac zmienna w komponencie skryptu
-    [SerializeField] float speed = 2f;
-    [SerializeField] float jumpVelocity = 200f;
-    [SerializeField] private LayerMask platformslayerMask;
+    [Header("Components")]
+    public Rigidbody2D rb;
 
-    [Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;
-    private Vector3 m_Velocity = Vector3.zero;
+    [Header("Physics")]
+    public float maxSpeed = 7f;
+    public float linerDrag = 4f;
 
-    private void Awake()
+    private void Update()
     {
-        rigidbody2d = transform.GetComponent<Rigidbody2D>();
-        boxCollider2d = transform.GetComponent<BoxCollider2D>();
-        jump = rigidbody2d.velocity.y;
-
+        direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     }
 
-    void Update(){
-        horizontal_direction = Input.GetAxisRaw("Horizontal");
-        
-        horizontal_move = horizontal_direction * speed;  
-        complete_move = new Vector2(horizontal_move, rigidbody2d.velocity.y);
+    private void FixedUpdate()
+    {
+        moveCharacter(direction.x);
+        modifyPhysics();
+    }
 
-        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
+    void moveCharacter(float horizontal)
+    {
+        rb.AddForce(Vector2.right * horizontal * moveSpeed);
+
+        if(Mathf.Abs(rb.velocity.x) > maxSpeed)
         {
-            rigidbody2d.AddForce(new Vector2(0f, jumpVelocity));
+            rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * maxSpeed, rb.velocity.y);
         }
-
-        rigidbody2d.velocity = Vector3.SmoothDamp(rigidbody2d.velocity, complete_move, ref m_Velocity, m_MovementSmoothing);
     }
 
-    private bool IsGrounded()
+    void modifyPhysics()
     {
-        RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, 0.1f, platformslayerMask);
-        //Debug.Log(raycastHit2d);
-        return raycastHit2d.collider != null;
+        if(Mathf.Abs(direction.x) < 0.4f)
+        {
+            rb.drag = linerDrag;
+        }
+        else
+        {
+            rb.drag = 0f;
+        }
     }
-
 }
