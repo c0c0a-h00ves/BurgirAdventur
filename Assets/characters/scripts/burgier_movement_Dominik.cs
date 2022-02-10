@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class burgier_movement : MonoBehaviour
+public class burgier_movement_Dominik : MonoBehaviour
 {
     [Header("Horizontal Movement")]
     public float moveSpeed = 10f;
