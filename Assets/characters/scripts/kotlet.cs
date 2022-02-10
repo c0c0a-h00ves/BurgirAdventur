@@ -10,9 +10,13 @@ public class kotlet : MonoBehaviour
     float timer = 0f;
     Vector2 initialPosition;
     bool isSpawned;
+    private Vector2 boxCoordinates;
+    private Vector2 boxSize;
+
 
     [SerializeField] float jumpVelocity;
     [SerializeField] float timeUntilDestruction = 5;
+
     private void Start()
     {
         initialPosition = transform.position;
@@ -43,7 +47,9 @@ public class kotlet : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        boxCoordinates = new Vector2(burger.transform.position.x + 0.5f, burger.transform.position.y);
+        boxSize = new Vector2(transform.position.x, transform.position.y);
+        if (Input.GetKeyDown(KeyCode.Q) && !Physics2D.OverlapBox(boxCoordinates, transform.localScale, transform.eulerAngles.z))
         {
             transform.position = new Vector3(burger.transform.position.x + 0.5f, burger.transform.position.y, 0);
             isSpawned = true;
