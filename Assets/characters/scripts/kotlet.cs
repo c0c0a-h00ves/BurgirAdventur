@@ -47,6 +47,7 @@ public class kotlet : MonoBehaviour
         {
             transform.position = new Vector3(burger.transform.position.x + 0.5f, burger.transform.position.y, 0);
             isSpawned = true;
+            timer = 0;
         }
         if (isSpawned)
         {
