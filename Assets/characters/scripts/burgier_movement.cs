@@ -9,10 +9,12 @@ public class burgier_movement : MonoBehaviour
     private Rigidbody2D rigidbody2d;
     private BoxCollider2D boxCollider2d;
     float jump;
+    float speed;
+    float jump_direction;
 
 // Zmienne ktore modyfikujemy my (w przyszlosci do beda stale)
 // serialize daje ze mozna zmieniac zmienna w komponencie skryptu
-    [SerializeField] float speed = 2f;
+    [SerializeField] float input_speed = 2f;
     [SerializeField] float jumpVelocity = 200f;
     [SerializeField] private LayerMask platformslayerMask;
 
@@ -21,6 +23,7 @@ public class burgier_movement : MonoBehaviour
 
     private void Awake()
     {
+        speed = input_speed;
         rigidbody2d = transform.GetComponent<Rigidbody2D>();
         boxCollider2d = transform.GetComponent<BoxCollider2D>();
         jump = rigidbody2d.velocity.y;
@@ -32,9 +35,15 @@ public class burgier_movement : MonoBehaviour
         
         horizontal_move = horizontal_direction * speed;  
         complete_move = new Vector2(horizontal_move, rigidbody2d.velocity.y);
-
+        if(!IsGrounded() && horizontal_direction!=jump_direction){
+            speed = input_speed / 2f;
+        }
+        else{
+            speed = input_speed;
+        }
         if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
         {
+            jump_direction = horizontal_direction;
             rigidbody2d.AddForce(new Vector2(0f, jumpVelocity));
         }
 
