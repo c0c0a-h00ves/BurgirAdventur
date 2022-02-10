@@ -11,7 +11,8 @@ public class burgier_movement : MonoBehaviour
     float jump;
     float speed;
     float jump_direction;
-
+    Animator anim;
+    GameObject burger;
 // Zmienne ktore modyfikujemy my (w przyszlosci do beda stale)
 // serialize daje ze mozna zmieniac zmienna w komponencie skryptu
     [SerializeField] float input_speed = 2f;
@@ -23,6 +24,8 @@ public class burgier_movement : MonoBehaviour
 
     private void Awake()
     {
+        burger = GameObject.Find("burger");
+        anim = burger.GetComponent<Animator>();
         speed = input_speed;
         rigidbody2d = transform.GetComponent<Rigidbody2D>();
         boxCollider2d = transform.GetComponent<BoxCollider2D>();
@@ -46,7 +49,21 @@ public class burgier_movement : MonoBehaviour
             jump_direction = horizontal_direction;
             rigidbody2d.AddForce(new Vector2(0f, jumpVelocity));
         }
-
+        if (horizontal_direction != 0 && 
+            !anim.GetCurrentAnimatorStateInfo(0).IsName("BurgirMovment_Jump") &&
+            IsGrounded())
+        {
+            anim.SetBool("isWalking", true);
+        }
+        else
+        {
+            anim.SetBool("isWalking", false);
+        }
+        if(Input.GetKeyDown(KeyCode.Space) && !anim.GetCurrentAnimatorStateInfo(0).IsName("BurgirMovment_Jump"))
+        {
+            anim.SetBool("isWalking", false);
+            anim.SetTrigger("jump");
+        }
         rigidbody2d.velocity = Vector3.SmoothDamp(rigidbody2d.velocity, complete_move, ref m_Velocity, m_MovementSmoothing);
     }
 
