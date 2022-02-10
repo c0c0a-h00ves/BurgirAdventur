@@ -13,7 +13,6 @@ public class burgier_movement : MonoBehaviour
 
     [Header("Components")]
     public Rigidbody2D rb;
-    public LayerMask groundLayer;
     
 
     [Header("Physics")]
@@ -23,13 +22,20 @@ public class burgier_movement : MonoBehaviour
     public float fallMultiplier = 5f;
 
     [Header("Collision")]
-    public bool onGround = false;
+    //public bool onGround = false;
     public float groundLength = 0.6f;
+
+    private BoxCollider2D boxCollider2d;
+    [SerializeField] private LayerMask platformslayerMask;
+
+    private void Awake()
+    {
+        boxCollider2d = transform.GetComponent<BoxCollider2D>();
+
+    }
 
     private void Update()
     {
-        onGround = Physics2D.Raycast(transform.position, Vector2.down, groundLength, groundLayer);
-
         if (Input.GetButtonDown("Jump"))
         {
             jumpTimer = Time.time + jumpDelay;
@@ -42,7 +48,7 @@ public class burgier_movement : MonoBehaviour
     {
         moveCharacter(direction.x);
 
-        if (jumpTimer > Time.time && onGround)
+        if (jumpTimer > Time.time && IsGrounded())
         {
             Jump();
         }
@@ -71,7 +77,7 @@ public class burgier_movement : MonoBehaviour
     {
         bool changingDirections = (direction.x > 0 && rb.velocity.x < 0) || (direction.x < 0 && rb.velocity.x > 0);
 
-        if (onGround)
+        if (IsGrounded())
         {
             if (Mathf.Abs(direction.x) < 0.4f || changingDirections)
             {
@@ -98,6 +104,13 @@ public class burgier_movement : MonoBehaviour
         }
 
   
+    }
+
+    private bool IsGrounded()
+    {
+        RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, 0.1f, platformslayerMask);
+        //Debug.Log(raycastHit2d);
+        return raycastHit2d.collider != null;
     }
 
     private void OnDrawGizmos()
