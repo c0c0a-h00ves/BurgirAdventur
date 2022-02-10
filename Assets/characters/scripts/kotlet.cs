@@ -47,14 +47,18 @@ public class kotlet : MonoBehaviour
 
     void Update()
     {
+        //coordy gdzie bedzie kotlet
         boxCoordinates = new Vector2(burger.transform.position.x + 0.5f, burger.transform.position.y);
+        //rozmiar kotleta
         boxSize = new Vector2(transform.position.x, transform.position.y);
+        //sprawdzenie czy nie probuje sie zrespic w srodku innego collidera
         if (Input.GetKeyDown(KeyCode.Q) && !Physics2D.OverlapBox(boxCoordinates, transform.localScale, transform.eulerAngles.z))
         {
             transform.position = new Vector3(burger.transform.position.x + 0.5f, burger.transform.position.y, 0);
             isSpawned = true;
             timer = 0;
         }
+        //liczenie czasu do znikniecia kotleta 
         if (isSpawned)
         {
             timer += Time.deltaTime;
