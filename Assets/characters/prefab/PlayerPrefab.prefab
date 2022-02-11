@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7136336827888519563}
   - component: {fileID: 7136336827888519564}
   - component: {fileID: 1269133541}
+  - component: {fileID: 760573862}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Untagged
@@ -121,7 +122,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3971856680287636932}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d35c2909806505148a1e405950bd7777, type: 3}
   m_Name: 
@@ -183,6 +184,33 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &760573862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3971856680287636932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8411c0c86aae3134499e6d3fa0629a23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  jump_backward_drag: 2.5
+  m_MovementSmoothing: 0.05
+  jumpSpeed: 5
+  jumpDelay: 0.25
+  rb: {fileID: 7136336827888519565}
+  max_speed: 7
+  linerDrag: 7
+  gravity: 1
+  fallMultiplier: 3
+  groundLength: 0.6
+  platformslayerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  direction: {x: 0, y: 0}
 --- !u!1001 &8484571367451033561
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -250,7 +278,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8566371187498732674, guid: 1cfa3cc4d49e8fc4a8b3db1edd6ece71, type: 3}
   m_PrefabInstance: {fileID: 8484571367451033561}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &8481505793860894887
+--- !u!95 &6697935041224085761
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
