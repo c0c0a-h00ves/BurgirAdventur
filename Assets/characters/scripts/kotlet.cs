@@ -57,9 +57,9 @@ public class kotlet : MonoBehaviour
         //rozmiar kotleta
         boxSize = new Vector2(transform.position.x, transform.position.y);
         //sprawdzenie czy kierunek jest w lewo czy prawo
-        if (Input.GetAxisRaw("Horizontal") == 1)
+        if (Input.GetAxisRaw("Horizontal") == 1f)
             isFacingRight = true;
-        else if (Input.GetAxisRaw("Horizontal") == -1)
+        else if (Input.GetAxisRaw("Horizontal") == -1f)
             isFacingRight = false;
         //sprawdzenie czy nie probuje sie zrespic w srodku innego collidera i zrespienie kotleta
         if (Input.GetKeyDown(KeyCode.Q) && !Physics2D.OverlapBox(boxCoordinates, transform.localScale, transform.eulerAngles.z))
