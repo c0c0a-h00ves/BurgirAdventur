@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class kotlet : MonoBehaviour
 {
-    GameObject burger;
-    GameObject level;
-    Animator anim;
-    float timer = 0f;
-    Vector2 initialPosition;
-    bool isSpawned;
+    private GameObject burger;
+    private GameObject level;
+    private Animator anim;
+    private float timer = 0f;
+    private Vector2 initialPosition;
+    private bool isFacingRight;
+    private bool isSpawned;
     private Vector2 boxCoordinates;
     private Vector2 boxSize;
 
 
     [SerializeField] float jumpVelocity;
     [SerializeField] float timeUntilDestruction = 5;
+    [SerializeField] float spawnDistance = 0.5f;
 
     private void Start()
     {
@@ -48,13 +50,25 @@ public class kotlet : MonoBehaviour
     void Update()
     {
         //coordy gdzie bedzie kotlet
-        boxCoordinates = new Vector2(burger.transform.position.x + 0.5f, burger.transform.position.y);
+        if(isFacingRight)
+            boxCoordinates = new Vector2(burger.transform.position.x + 0.5f, burger.transform.position.y);
+        else
+            boxCoordinates = new Vector2(burger.transform.position.x - 0.5f, burger.transform.position.y);
         //rozmiar kotleta
         boxSize = new Vector2(transform.position.x, transform.position.y);
-        //sprawdzenie czy nie probuje sie zrespic w srodku innego collidera
+        //sprawdzenie czy kierunek jest w lewo czy prawo
+        if (Input.GetAxisRaw("Horizontal") == 1)
+            isFacingRight = true;
+        else if (Input.GetAxisRaw("Horizontal") == -1)
+            isFacingRight = false;
+        //sprawdzenie czy nie probuje sie zrespic w srodku innego collidera i zrespienie kotleta
         if (Input.GetKeyDown(KeyCode.Q) && !Physics2D.OverlapBox(boxCoordinates, transform.localScale, transform.eulerAngles.z))
         {
-            transform.position = new Vector3(burger.transform.position.x + 0.5f, burger.transform.position.y, 0);
+            //jak patrzy w prawo to sie respi po prawo jak nie to po lewo
+            if(isFacingRight)
+                transform.position = new Vector3(burger.transform.position.x + spawnDistance, burger.transform.position.y, 0);
+            else
+                transform.position = new Vector3(burger.transform.position.x - spawnDistance, burger.transform.position.y, 0);
             isSpawned = true;
             timer = 0;
         }
