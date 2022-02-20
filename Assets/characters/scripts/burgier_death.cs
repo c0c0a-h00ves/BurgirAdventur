@@ -21,7 +21,7 @@ public class burgier_death : MonoBehaviour
         //robienie ze burger podskakuje po smierci
         _rigidBody = transform.GetComponent<Rigidbody2D>();
         _rigidBody.velocity = Vector2.up * thrust;
-
+        deathCountScript.addDeath();
         //wylaczenie collidera
         GetComponent<BoxCollider2D>().enabled = false; // jak bedzie polygon collider to zmienic
         //wylaczenie poruszania sie po smierci
