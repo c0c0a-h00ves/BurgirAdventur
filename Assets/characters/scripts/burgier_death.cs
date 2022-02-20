@@ -3,12 +3,18 @@ using UnityEngine.SceneManagement;
 
 public class burgier_death : MonoBehaviour
 {
+    burger_deathCount deathCountScript;
+
     public bool isDead = false;
     private float _timer = 0;
     private Rigidbody2D _rigidBody;
 
     [SerializeField] private float thrust = 1f;
     [SerializeField] private float _timeToResetScene = 2;
+    private void Start()
+    {
+        deathCountScript = GameObject.Find("deathCounterObject").GetComponent<burger_deathCount>();
+    }
 
     public void Death()
     {
@@ -19,7 +25,7 @@ public class burgier_death : MonoBehaviour
         //wylaczenie collidera
         GetComponent<BoxCollider2D>().enabled = false; // jak bedzie polygon collider to zmienic
         //wylaczenie poruszania sie po smierci
-        GetComponent<burgier_movement_Dominik>().enabled = false;
+        GetComponent<burgier_movement>().enabled = false;
     }
     private void Update()
     {
