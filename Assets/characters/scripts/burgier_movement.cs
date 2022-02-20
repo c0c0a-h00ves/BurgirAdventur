@@ -12,6 +12,7 @@ public class burgier_movement : MonoBehaviour
     public float jumpSpeed = 5f;
     public float jumpDelay = 0.25f;
     [SerializeField] private float air_time = 1f;
+    [SerializeField] private float linerDragAir = 0.1f;
 
     [Header("Components")]
     public Rigidbody2D rb;
@@ -140,7 +141,7 @@ public class burgier_movement : MonoBehaviour
         else
         {
             rb.gravityScale = gravity;
-            rb.drag = linerDrag * 0.15f;
+            rb.drag = linerDragAir * 0.15f;
             
             if(rb.velocity.y < 0)
             {

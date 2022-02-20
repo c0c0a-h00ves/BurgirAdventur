@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8566371187498732674}
   - component: {fileID: 8566371187498732675}
-  - component: {fileID: 4705654789341947968}
+  - component: {fileID: 7136336827888519562}
   m_Layer: 0
   m_Name: burger
   m_TagString: Untagged
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &4705654789341947968
+--- !u!95 &7136336827888519562
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
