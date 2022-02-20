@@ -2,56 +2,79 @@ using UnityEngine;
 
 public class burgier_movement : MonoBehaviour
 {
-// Zmienne ktore modyfikuje silnik
-    float horizontal_direction = 0f;
-    float horizontal_move = 0f;
-    Vector3 complete_move;
-    private Rigidbody2D rigidbody2d;
-    private BoxCollider2D boxCollider2d;
-    float jump;
-    float speed;
-    float jump_direction;
-    Animator anim;
-    GameObject burger;
-// Zmienne ktore modyfikujemy my (w przyszlosci do beda stale)
-// serialize daje ze mozna zmieniac zmienna w komponencie skryptu
-    [SerializeField] float input_speed = 2f;
-    [SerializeField] float jumpVelocity = 200f;
+    // ustawiane przez nas
+    [Header("Horizontal Movement")]
+    public float moveSpeed = 5f;
+    [SerializeField] private float jump_backward_drag = 2.5f;
+    [Range(0, 0.3f)] [SerializeField] private float m_MovementSmoothing = 0.05f;
+
+    [Header("Vertical Movement")]
+    public float jumpSpeed = 5f;
+    public float jumpDelay = 0.25f;
+    [SerializeField] private float air_time = 1f;
+
+    [Header("Components")]
+    public Rigidbody2D rb;
+    private Animator anim;
+    
+    [Header("Physics")]
+    public float max_speed = 7f;
+    public float linerDrag = 10f;
+    public float gravity = 1;
+    public float fallMultiplier = 2f;
+
+    [Header("Collision")]
+    public float groundLength = 0.6f;
     [SerializeField] private LayerMask platformslayerMask;
 
-    [Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;
+// tymi zarządza skrypt
+    private BoxCollider2D boxCollider2d;
+    private Vector3 complete_move;
+    private float jump_direction;
+    private Vector2 counter_drag;
+    public Vector2 direction;
+    private float jumpTimer;
     private Vector3 m_Velocity = Vector3.zero;
+    private GameObject burger;
+    private bool is_jumping = false;
+    private float air_time_counter;
+    
+
 
     private void Awake()
     {
         burger = GameObject.Find("burger");
-        anim = burger.GetComponent<Animator>();
-        speed = input_speed;
-        rigidbody2d = transform.GetComponent<Rigidbody2D>();
         boxCollider2d = transform.GetComponent<BoxCollider2D>();
-        jump = rigidbody2d.velocity.y;
+        anim = burger.GetComponent<Animator>();
 
     }
 
-    void Update(){
-        horizontal_direction = Input.GetAxisRaw("Horizontal");
-        
-        horizontal_move = horizontal_direction * speed;  
-        complete_move = new Vector2(horizontal_move, rigidbody2d.velocity.y);
-        if(!IsGrounded() && horizontal_direction!=jump_direction){
-            speed = input_speed / 2f;
-        }
-        else{
-            speed = input_speed;
-        }
-        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
-            jump_direction = horizontal_direction;
-            rigidbody2d.AddForce(new Vector2(0f, jumpVelocity));
+            is_jumping = true;
+            air_time_counter = air_time;
+            jumpTimer = Time.time + jumpDelay;
         }
-        if (horizontal_direction != 0 && 
-            !anim.GetCurrentAnimatorStateInfo(0).IsName("BurgirMovment_Jump") &&
-            IsGrounded())
+        if (Input.GetKey(KeyCode.Space) && is_jumping){
+            if(air_time_counter > 0){
+                jumpTimer = Time.time + jumpDelay;
+                air_time_counter -= Time.deltaTime;
+            }
+            else{
+                is_jumping = false;
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.Space)){
+            is_jumping = false;
+        }
+
+        direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+
+        //               Animacja            //
+        if (direction.x != 0 && !anim.GetCurrentAnimatorStateInfo(0).IsName("BurgirMovment_Jump") && IsGrounded())
         {
             anim.SetBool("isWalking", true);
         }
@@ -64,7 +87,71 @@ public class burgier_movement : MonoBehaviour
             anim.SetBool("isWalking", false);
             anim.SetTrigger("jump");
         }
-        rigidbody2d.velocity = Vector3.SmoothDamp(rigidbody2d.velocity, complete_move, ref m_Velocity, m_MovementSmoothing);
+    }
+
+    private void FixedUpdate()
+    {
+        moveCharacter(direction.x);
+
+        if (jumpTimer > Time.time)
+        {
+            Jump();
+        }
+
+        modifyPhysics();
+    }
+
+    void moveCharacter(float horizontal)
+    {
+        complete_move = new Vector3(horizontal * moveSpeed, rb.velocity.y);
+        if(!IsGrounded() && jump_direction != horizontal){
+            counter_drag = new Vector2(Mathf.Abs(rb.velocity.x), 0f);
+            rb.AddForce(counter_drag *jump_backward_drag); //Vector2.right = [1, 0]
+        }
+        
+        rb.velocity =Vector3.SmoothDamp(rb.velocity, complete_move, ref m_Velocity, m_MovementSmoothing,  max_speed);
+        
+    }
+
+    void Jump()
+    {
+        jump_direction = direction.x;
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse); // Pierwszy parametr kierunek i moc, drugi parametr oznacza ze sie robi to instant jak zupka
+        jumpTimer = 0;
+    }
+
+    void modifyPhysics()
+    {
+        bool changingDirections = (direction.x > 0 && rb.velocity.x < 0) || (direction.x < 0 && rb.velocity.x > 0);
+
+        if (IsGrounded())
+        {
+            if (Mathf.Abs(direction.x) < 0.4f || changingDirections)
+            {
+                rb.drag = linerDrag;
+            }
+            else
+            {
+                rb.drag = 0f;
+            }
+            rb.gravityScale = 0;
+        }
+        else
+        {
+            rb.gravityScale = gravity;
+            rb.drag = linerDrag * 0.15f;
+            
+            if(rb.velocity.y < 0)
+            {
+                rb.gravityScale = gravity * fallMultiplier;
+            } else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
+            {
+                rb.gravityScale = gravity * (fallMultiplier / 2);
+            }
+        }
+
+  
     }
 
     private bool IsGrounded()
@@ -74,4 +161,9 @@ public class burgier_movement : MonoBehaviour
         return raycastHit2d.collider != null;
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundLength);
+    }
 }
