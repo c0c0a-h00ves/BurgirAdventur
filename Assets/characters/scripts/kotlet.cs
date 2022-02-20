@@ -9,7 +9,7 @@ public class kotlet : MonoBehaviour
     private Animator anim;
     private float timer = 0f;
     private Vector2 initialPosition;
-    private bool isFacingRight;
+    private float facing_direction;
     private bool isSpawned;
     private Vector2 boxCoordinates;
     private Vector2 boxSize;
@@ -50,25 +50,17 @@ public class kotlet : MonoBehaviour
     void Update()
     {
         //coordy gdzie bedzie kotlet
-        if(isFacingRight)
-            boxCoordinates = new Vector2(burger.transform.position.x + 0.5f, burger.transform.position.y);
-        else
-            boxCoordinates = new Vector2(burger.transform.position.x - 0.5f, burger.transform.position.y);
+            boxCoordinates = new Vector2(burger.transform.position.x + (spawnDistance * facing_direction), burger.transform.position.y);
         //rozmiar kotleta
         boxSize = new Vector2(transform.position.x, transform.position.y);
         //sprawdzenie czy kierunek jest w lewo czy prawo
-        if (Input.GetAxisRaw("Horizontal") == 1f)
-            isFacingRight = true;
-        else if (Input.GetAxisRaw("Horizontal") == -1f)
-            isFacingRight = false;
+        if (Input.GetAxisRaw("Horizontal") != 0f)
+            facing_direction = Input.GetAxisRaw("Horizontal");
         //sprawdzenie czy nie probuje sie zrespic w srodku innego collidera i zrespienie kotleta
         if (Input.GetKeyDown(KeyCode.Q) && !Physics2D.OverlapBox(boxCoordinates, transform.localScale, transform.eulerAngles.z))
         {
             //jak patrzy w prawo to sie respi po prawo jak nie to po lewo
-            if(isFacingRight)
-                transform.position = new Vector3(burger.transform.position.x + spawnDistance, burger.transform.position.y, 0);
-            else
-                transform.position = new Vector3(burger.transform.position.x - spawnDistance, burger.transform.position.y, 0);
+               transform.position = new Vector3(burger.transform.position.x + (spawnDistance * facing_direction), burger.transform.position.y, 0);
             isSpawned = true;
             timer = 0;
         }
