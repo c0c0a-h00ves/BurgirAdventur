@@ -19,7 +19,7 @@ public class burgier_death : MonoBehaviour
         //wylaczenie collidera
         GetComponent<BoxCollider2D>().enabled = false; // jak bedzie polygon collider to zmienic
         //wylaczenie poruszania sie po smierci
-        GetComponent<burgier_movement_Dominik>().enabled = false;
+        GetComponent<burgier_movement>().enabled = false;
     }
     private void Update()
     {
