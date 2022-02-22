@@ -39,12 +39,13 @@ public class burgier_movement : MonoBehaviour
     private GameObject burger;
     private bool is_jumping = false;
     private float air_time_counter;
-    
 
+    private GameObject ser;
 
     private void Awake()
     {
         burger = GameObject.Find("burger");
+        ser = GameObject.Find("ser");
         boxCollider2d = transform.GetComponent<BoxCollider2D>();
         anim = burger.GetComponent<Animator>();
 
@@ -157,9 +158,26 @@ public class burgier_movement : MonoBehaviour
 
     private bool IsGrounded()
     {
+
+
         RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, 0.1f, platformslayerMask);
         //Debug.Log(raycastHit2d);
-        return raycastHit2d.collider != null;
+
+        if (!(raycastHit2d.collider != null))
+        {
+            if (ser.GetComponent<ser>().cheesed)
+            {
+                return true;
+            }
+            else 
+            {
+                return false;
+            }
+        }
+        else 
+        {
+            return true;
+        }
     }
 
     private void OnDrawGizmos()

@@ -168,6 +168,7 @@ MonoBehaviour:
   jumpSpeed: 3
   jumpDelay: 0.25
   air_time: 0.075
+  linerDragAir: 0.1
   rb: {fileID: 7136336827888519565}
   max_speed: 6
   linerDrag: 25
