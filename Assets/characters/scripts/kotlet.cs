@@ -11,6 +11,7 @@ public class kotlet : MonoBehaviour
     private Vector2 initialPosition;
     private float facing_direction;
     private bool isSpawned;
+    public bool isOnKotlet;
     private Vector2 boxCoordinates;
     private Vector2 boxSize;
 
@@ -32,6 +33,7 @@ public class kotlet : MonoBehaviour
         //sprawdzenie czy kolizja jest z burgerem i czy nastapila od gory
         if(collision.gameObject == burger && collision.contacts[0].normal.y < -0.5)
         {
+            isOnKotlet = true;
             //dodanie gornego velocity
             burger.GetComponent<Rigidbody2D>().velocity = transform.up * jumpVelocity;
             //odpalenie animacji skoku i wylaczenie animacji chodzenia
@@ -45,6 +47,11 @@ public class kotlet : MonoBehaviour
         }
 
     }
+    /*private void OnCollisionExit2D(Collision2D collision)
+    {
+        if(collision.gameObject == burger)
+            isOnKotlet = false;
+    }*/
 
 
     void Update()

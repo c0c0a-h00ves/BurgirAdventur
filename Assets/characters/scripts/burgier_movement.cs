@@ -41,11 +41,13 @@ public class burgier_movement : MonoBehaviour
     private float air_time_counter;
 
     private GameObject ser;
+    private GameObject kotlet;
 
     private void Awake()
     {
         burger = GameObject.Find("burger");
         ser = GameObject.Find("ser");
+        kotlet = GameObject.Find("kotlet");
         boxCollider2d = transform.GetComponent<BoxCollider2D>();
         anim = burger.GetComponent<Animator>();
 
@@ -59,7 +61,8 @@ public class burgier_movement : MonoBehaviour
             air_time_counter = air_time;
             jumpTimer = Time.time + jumpDelay;
         }
-        if (Input.GetKey(KeyCode.Space) && is_jumping){
+        if (Input.GetKey(KeyCode.Space) && is_jumping)
+        {
             if(air_time_counter > 0){
                 jumpTimer = Time.time + jumpDelay;
                 air_time_counter -= Time.deltaTime;
@@ -147,7 +150,7 @@ public class burgier_movement : MonoBehaviour
             if(rb.velocity.y < 0)
             {
                 rb.gravityScale = gravity * fallMultiplier;
-            } else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
+            } else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space) && !kotlet.GetComponent<kotlet>().isOnKotlet)
             {
                 rb.gravityScale = gravity * (fallMultiplier / 2);
             }
@@ -163,10 +166,12 @@ public class burgier_movement : MonoBehaviour
         RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2d.bounds.center, boxCollider2d.bounds.size, 0f, Vector2.down, 0.1f, platformslayerMask);
         //Debug.Log(raycastHit2d);
 
+        
         if (!(raycastHit2d.collider != null))
         {
             if (ser.GetComponent<ser>().cheesed)
             {
+                kotlet.GetComponent<kotlet>().isOnKotlet = false;
                 return true;
             }
             else 
@@ -176,6 +181,7 @@ public class burgier_movement : MonoBehaviour
         }
         else 
         {
+            kotlet.GetComponent<kotlet>().isOnKotlet = false;
             return true;
         }
     }
