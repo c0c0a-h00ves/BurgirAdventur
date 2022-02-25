@@ -5,7 +5,6 @@ using UnityEngine;
 public class kotlet : MonoBehaviour
 {
     private GameObject burger;
-    private GameObject level;
     private Animator anim;
     private float timer = 0f;
     private Vector2 initialPosition;
@@ -13,25 +12,22 @@ public class kotlet : MonoBehaviour
     private bool isSpawned;
     public bool isOnKotlet;
     private Vector2 boxCoordinates;
-    private Vector2 boxSize;
 
 
     [SerializeField] float jumpVelocity;
-    [SerializeField] float timeUntilDestruction = 5;
+    [SerializeField] float timeUntilDestruction = 5f;
     [SerializeField] float spawnDistance = 0.5f;
 
     private void Start()
     {
         initialPosition = transform.position;
         burger = GameObject.Find("PlayerPrefab");
-        level = GameObject.Find("Level1-1");
         anim = GameObject.Find("burger").GetComponent<Animator>();
     }
     //wykrywanie kolizji
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        //sprawdzenie czy kolizja jest z burgerem i czy nastapila od gory
-        if(collision.gameObject == burger && collision.contacts[0].normal.y < -0.5)
+        if (collision.gameObject == burger)
         {
             isOnKotlet = true;
             //dodanie gornego velocity
@@ -40,26 +36,12 @@ public class kotlet : MonoBehaviour
             anim.SetTrigger("jump");
             anim.SetBool("isWalking", false);
         }
-        if(collision.gameObject == level)
-        {
-            Debug.Log("ddddd");
-            transform.position = initialPosition;
-        }
-
     }
-    /*private void OnCollisionExit2D(Collision2D collision)
-    {
-        if(collision.gameObject == burger)
-            isOnKotlet = false;
-    }*/
-
 
     void Update()
     {
         //coordy gdzie bedzie kotlet
-            boxCoordinates = new Vector2(burger.transform.position.x + (spawnDistance * facing_direction), burger.transform.position.y);
-        //rozmiar kotleta
-        boxSize = new Vector2(transform.position.x, transform.position.y);
+        boxCoordinates = new Vector2(burger.transform.position.x + (spawnDistance * facing_direction), burger.transform.position.y);
         //sprawdzenie czy kierunek jest w lewo czy prawo
         if (Input.GetAxisRaw("Horizontal") != 0f)
             facing_direction = Input.GetAxisRaw("Horizontal");
@@ -67,7 +49,7 @@ public class kotlet : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q) && !Physics2D.OverlapBox(boxCoordinates, transform.localScale, transform.eulerAngles.z))
         {
             //jak patrzy w prawo to sie respi po prawo jak nie to po lewo
-               transform.position = new Vector3(burger.transform.position.x + (spawnDistance * facing_direction), burger.transform.position.y, 0);
+            transform.position = new Vector3(burger.transform.position.x + (spawnDistance * facing_direction), burger.transform.position.y, 0);
             isSpawned = true;
             timer = 0;
         }

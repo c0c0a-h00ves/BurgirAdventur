@@ -201,7 +201,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 48953050}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.00000011920929, y: 0.49402386, z: -20}
+  m_LocalPosition: {x: 0.00000017881393, y: 0.49402386, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -363,7 +363,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 381397743}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.00000011920929, y: 0.49402386, z: -20}
+  m_LocalPosition: {x: 0.00000017881393, y: 0.49402386, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1244046262}
@@ -717,38 +717,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 760573862, guid: bc8f0558477a7404f86cd1efadaaaabf, type: 3}
-      propertyPath: gravity
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 760573862, guid: bc8f0558477a7404f86cd1efadaaaabf, type: 3}
-      propertyPath: air_time
-      value: 0.075
-      objectReference: {fileID: 0}
-    - target: {fileID: 760573862, guid: bc8f0558477a7404f86cd1efadaaaabf, type: 3}
-      propertyPath: jumpSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 760573862, guid: bc8f0558477a7404f86cd1efadaaaabf, type: 3}
-      propertyPath: linerDrag
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 760573862, guid: bc8f0558477a7404f86cd1efadaaaabf, type: 3}
-      propertyPath: max_speed
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 760573862, guid: bc8f0558477a7404f86cd1efadaaaabf, type: 3}
-      propertyPath: moveSpeed
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 760573862, guid: bc8f0558477a7404f86cd1efadaaaabf, type: 3}
-      propertyPath: fallMultiplier
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 760573862, guid: bc8f0558477a7404f86cd1efadaaaabf, type: 3}
-      propertyPath: m_MovementSmoothing
-      value: 0.25
-      objectReference: {fileID: 0}
     - target: {fileID: 3971856680287636932, guid: bc8f0558477a7404f86cd1efadaaaabf, type: 3}
       propertyPath: m_Name
       value: PlayerPrefab
