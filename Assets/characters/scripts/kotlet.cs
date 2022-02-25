@@ -46,7 +46,7 @@ public class kotlet : MonoBehaviour
         if (Input.GetAxisRaw("Horizontal") != 0f)
             facing_direction = Input.GetAxisRaw("Horizontal");
         //sprawdzenie czy nie probuje sie zrespic w srodku innego collidera i zrespienie kotleta
-        if (Input.GetKeyDown(KeyCode.Q) && !Physics2D.OverlapBox(boxCoordinates, transform.localScale, transform.eulerAngles.z))
+        if (Input.GetKeyDown(KeyCode.Q) && !Physics2D.OverlapBox(boxCoordinates, transform.localScale, transform.eulerAngles.z) && isOnKotlet == false)
         {
             //jak patrzy w prawo to sie respi po prawo jak nie to po lewo
             transform.position = new Vector3(burger.transform.position.x + (spawnDistance * facing_direction), burger.transform.position.y, 0);
