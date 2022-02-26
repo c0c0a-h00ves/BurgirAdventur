@@ -48,7 +48,7 @@ public class spermokula : MonoBehaviour
             Debug.Log("ser");
             ser.GetComponent<ser>().isLaunched = false;
             czas = 0;
-            transform.position = initialPosition2;
+            transform.position = initialPosition2; // pozycja startowa poza map¹
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0);
         }
 
@@ -59,26 +59,26 @@ public class spermokula : MonoBehaviour
            // iks = wielkosci / 2;
             Debug.Log(wielkosci);
             Debug.Log("sciana");
-            initialPosition3 = transform.position;
-            transform.position = initialPosition2;
-            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0);
+            initialPosition3 = transform.position; // to jest pozycja spermokulki jak trafi w œciane
+            transform.position = initialPosition2; // wyjebanie sera poza mape
+            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0); // ustawienie szybkoœci kuli na 0
 
 
-            colliderKlocka = klocek.GetComponent<Collider2D>();
+            colliderKlocka = klocek.GetComponent<Collider2D>(); // zdobycie wielkoœci klocka 
             sizeKlocka = colliderKlocka.bounds.size;
-            iks = sizeKlocka.x/2;
+            iks = sizeKlocka.x/2; // wielkoœæ X'owa 
 
-            colliderSera = ser.GetComponent<Collider2D>();
+            colliderSera = ser.GetComponent<Collider2D>(); // zdobycie wielkoœci sera
             sizeSera = colliderSera.bounds.size;
-            iks2 = sizeSera.x / 2;
+            iks2 = sizeSera.x / 2; // wielkoœæ X'owa 
 
 
             if (collision.contacts[0].normal.x < -0.5)
-            {
-                ser.transform.position = new Vector2(klocek.transform.position.x - iks + iks2 - 0.005f, initialPosition3.y);
+            {   // przeniesienie sera na dan¹ pozycje
+                ser.transform.position = new Vector2(klocek.transform.position.x - iks + iks2 - 0.005f, initialPosition3.y); 
             }
             if (collision.contacts[0].normal.x > 0.5)
-            {
+            {   // przeniesienie sera na dan¹ pozycje
                 ser.transform.position = new Vector2(klocek.transform.position.x + iks - iks2 + 0.005f, initialPosition3.y);
             }
 
