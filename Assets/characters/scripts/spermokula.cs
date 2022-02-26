@@ -12,9 +12,9 @@ public class spermokula : MonoBehaviour
     private BoxCollider2D boxCollider2d;
 
 
-    private Vector3 initialPosition;
-    private Vector3 initialPosition2;
-    private Vector3 initialPosition3;
+    private Vector3 pozycja_sera;
+    private Vector3 inicjalna_pozycja_pocisku;
+    private Vector3 pozycja_zderzenia_pocisku;
 
     private float wielkosci;
     private float iks;
@@ -37,19 +37,19 @@ public class spermokula : MonoBehaviour
         boxCollider2d = transform.GetComponent<BoxCollider2D>();
         level = GameObject.Find("Level1-1");
         klocek = GameObject.Find("klocek");
-        initialPosition = ser.transform.position;
-        initialPosition2 = transform.position;
+        pozycja_sera = ser.transform.position;
+        inicjalna_pozycja_pocisku = transform.position;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if (collision.gameObject == ser && collision.contacts[0].normal.x < -0.5 || collision.gameObject == ser && collision.contacts[0].normal.x > 0.5)
+        if (collision.gameObject == ser)
         {
             Debug.Log("ser");
             ser.GetComponent<ser>().isLaunched = false;
             czas = 0;
-            transform.position = initialPosition2;
-            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0);
+            transform.position = inicjalna_pozycja_pocisku; // pozycja startowa poza mapą
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         }
 
 
@@ -59,27 +59,27 @@ public class spermokula : MonoBehaviour
            // iks = wielkosci / 2;
             Debug.Log(wielkosci);
             Debug.Log("sciana");
-            initialPosition3 = transform.position;
-            transform.position = initialPosition2;
-            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0);
+            pozycja_zderzenia_pocisku = transform.position; // to jest pozycja spermokulki jak trafi w ściane
+            transform.position = inicjalna_pozycja_pocisku; // wyjebanie sera poza mape
+            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0); // ustawienie szybkości kuli na 0
 
 
-            colliderKlocka = klocek.GetComponent<Collider2D>();
+            colliderKlocka = klocek.GetComponent<Collider2D>(); // zdobycie wielkości klocka 
             sizeKlocka = colliderKlocka.bounds.size;
-            iks = sizeKlocka.x/2;
+            iks = sizeKlocka.x/2; // wielkość X'owa 
 
-            colliderSera = ser.GetComponent<Collider2D>();
+            colliderSera = ser.GetComponent<Collider2D>(); // zdobycie wielkości sera
             sizeSera = colliderSera.bounds.size;
-            iks2 = sizeSera.x / 2;
+            iks2 = sizeSera.x / 2; // wielkość X'owa 
 
 
             if (collision.contacts[0].normal.x < -0.5)
-            {
-                ser.transform.position = new Vector2(klocek.transform.position.x - iks + iks2 - 0.005f, initialPosition3.y);
+            {   // przeniesienie sera na daną pozycje
+                ser.transform.position = new Vector2(klocek.transform.position.x - iks + iks2 - 0.005f, pozycja_zderzenia_pocisku.y); 
             }
             if (collision.contacts[0].normal.x > 0.5)
-            {
-                ser.transform.position = new Vector2(klocek.transform.position.x + iks - iks2 + 0.005f, initialPosition3.y);
+            {   // przeniesienie sera na daną pozycje
+                ser.transform.position = new Vector2(klocek.transform.position.x + iks - iks2 + 0.005f, pozycja_zderzenia_pocisku.y);
             }
 
 
@@ -98,7 +98,7 @@ public class spermokula : MonoBehaviour
             czas += Time.deltaTime;
             if (czas >= maxCzas)
             {
-                ser.transform.position = initialPosition;
+                ser.transform.position = pozycja_sera;
                 
                 czas = 0f;
                 przyklejone = false;
