@@ -37,22 +37,24 @@ public class kotlet : MonoBehaviour
             anim.SetBool("isWalking", false);
         }
     }
-
-    void Update()
+    public void SpawnKotlet(GameObject burger)
     {
-        //coordy gdzie bedzie kotlet
-        boxCoordinates = new Vector2(burger.transform.position.x + (spawnDistance * facing_direction), burger.transform.position.y);
-        //sprawdzenie czy kierunek jest w lewo czy prawo
-        if (Input.GetAxisRaw("Horizontal") != 0f)
-            facing_direction = Input.GetAxisRaw("Horizontal");
         //sprawdzenie czy nie probuje sie zrespic w srodku innego collidera i zrespienie kotleta
-        if (Input.GetKeyDown(KeyCode.Q) && !Physics2D.OverlapBox(boxCoordinates, transform.localScale, transform.eulerAngles.z) && isOnKotlet == false)
+        if (!Physics2D.OverlapBox(boxCoordinates, transform.localScale, transform.eulerAngles.z) && isOnKotlet == false)
         {
             //jak patrzy w prawo to sie respi po prawo jak nie to po lewo
             transform.position = new Vector3(burger.transform.position.x + (spawnDistance * facing_direction), burger.transform.position.y, 0);
             isSpawned = true;
             timer = 0;
         }
+    }
+    void Update()
+    {
+        //sprawdzenie czy kierunek jest w lewo czy prawo
+        if (Input.GetAxisRaw("Horizontal") != 0f)
+            facing_direction = Input.GetAxisRaw("Horizontal");
+        //coordy gdzie bedzie kotlet
+        boxCoordinates = new Vector2(burger.transform.position.x + (spawnDistance * facing_direction), burger.transform.position.y);
         //liczenie czasu do znikniecia kotleta 
         if (isSpawned)
         {
