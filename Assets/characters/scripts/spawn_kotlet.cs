@@ -26,10 +26,13 @@ public class spawn_kotlet : MonoBehaviour
         //sprawdzenie czy nie probuje sie zrespic w srodku innego collidera i zrespienie kotleta
         if (!Physics2D.OverlapBox(boxCoordinates, kotletScript.transform.localScale, kotletScript.transform.eulerAngles.z) && isOnKotlet == false)
         {
-            //jak patrzy w prawo to sie respi po prawo jak nie to po lewo
-            kotlet = Instantiate(kotletScript, boxCoordinates, Quaternion.identity);
-            Destroy(kotlet.gameObject, 5f);
-            return true;
+            if (!kotlet)
+            {
+                //jak patrzy w prawo to sie respi po prawo jak nie to po lewo
+                kotlet = Instantiate(kotletScript, boxCoordinates, Quaternion.identity);
+                Destroy(kotlet.gameObject, 5f);
+                return true;
+            }
         }
         return false;
     }
@@ -41,8 +44,8 @@ public class spawn_kotlet : MonoBehaviour
         //dodanie gornego velocity
         GetComponent<Rigidbody2D>().velocity = transform.up * jumpVelocity;
         //odpalenie animacji skoku i wylaczenie animacji chodzenia
-        /*GetComponentInChildren<Animator>().SetTrigger("jump");
-        GetComponentInChildren<Animator>().SetBool("isWalking", false);*/
+        GetComponentInChildren<Animator>().SetTrigger("jump");
+        GetComponentInChildren<Animator>().SetBool("isWalking", false);
     }
     void Update()
     {
