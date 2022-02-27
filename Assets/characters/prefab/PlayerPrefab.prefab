@@ -192,7 +192,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f421526e8d2dbc439108c202f86f470, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kotletScript: {fileID: 0}
+  jumpVelocity: 5
+  kotletScript: {fileID: 7960911585089152196, guid: f3e82fea9147f6d4db7595c979ea403e, type: 3}
+  isOnKotlet: 0
 --- !u!1001 &8335381066830512548
 PrefabInstance:
   m_ObjectHideFlags: 0

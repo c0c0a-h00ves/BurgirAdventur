@@ -5,18 +5,15 @@ using UnityEngine;
 public class kotlet : MonoBehaviour
 {
     private Animator anim;
-    private float timer = 0f;
-    private float facing_direction;
     private Vector3 collisionSide;
     private Vector3 vectorDifference;
-    private bool isSpawned;
-    public bool isOnKotlet;
-    private Vector2 boxCoordinates;
-
+    public bool isSpawned;
+    private float speed = 5f;
+    public bool sideHit = false;
+    private float dist;
+    GameObject burger;
 
     [SerializeField] float jumpVelocity;
-    [SerializeField] float timeUntilDestruction = 5f;
-    [SerializeField] float spawnDistance = 0.5f;
 
     private void Start()
     {
@@ -27,49 +24,44 @@ public class kotlet : MonoBehaviour
     {
         if (collision.gameObject.name == "PlayerPrefab")
         {
+            Debug.Log("gfhusfdgh");
             vectorDifference = collision.gameObject.transform.position - transform.position;
             collisionSide = vectorDifference.normalized;
+            burger = collision.gameObject;
+            burger.GetComponent<spawn_kotlet>().isOnKotlet = true;
             if (collisionSide.x == -1.0f || collisionSide.x == 1.0f)
             {
-                collision.gameObject.transform.position = transform.position;
+                sideHit = true;
+                burger.GetComponent<burgier_movement>().enabled = false;
             }
-
-            isOnKotlet = true;
-            //dodanie gornego velocity
-            collision.gameObject.GetComponent<Rigidbody2D>().velocity = transform.up * jumpVelocity;
-            //odpalenie animacji skoku i wylaczenie animacji chodzenia
-            anim.SetTrigger("jump");
-            anim.SetBool("isWalking", false);
+            else if(collisionSide.y > 0.5f)
+                burger.GetComponent<spawn_kotlet>().Bounce();
         }
     }
-    public void SpawnKotlet(GameObject burger)
+    /*public void Bounce()
     {
-        //coordy gdzie bedzie kotlet
-        boxCoordinates = new Vector2(burger.transform.position.x + (spawnDistance * facing_direction), burger.transform.position.y);
-        //sprawdzenie czy nie probuje sie zrespic w srodku innego collidera i zrespienie kotleta
-        if (!Physics2D.OverlapBox(boxCoordinates, transform.localScale, transform.eulerAngles.z) && isOnKotlet == false)
-        {
-            gameObject.SetActive(true);
-            //jak patrzy w prawo to sie respi po prawo jak nie to po lewo
-            transform.position = new Vector3(burger.transform.position.x + (spawnDistance * facing_direction), burger.transform.position.y, 0);
-            isSpawned = true;
-            timer = 0;
-        }
-    }
+        burger.GetComponent<burgier_movement>().enabled = true;
+        sideHit = false;
+        //dodanie gornego velocity
+        burger.GetComponent<Rigidbody2D>().velocity = transform.up * jumpVelocity;
+        //odpalenie animacji skoku i wylaczenie animacji chodzenia
+        anim.SetTrigger("jump");
+        anim.SetBool("isWalking", false);
+    }*/
     void Update()
     {
-        //sprawdzenie czy kierunek jest w lewo czy prawo
-        if (Input.GetAxisRaw("Horizontal") != 0f)
-            facing_direction = Input.GetAxisRaw("Horizontal");
-        //liczenie czasu do znikniecia kotleta 
-        if (isSpawned)
+        if (sideHit)
         {
-            timer += Time.deltaTime;
-            if(timer >= timeUntilDestruction)
+            dist = Vector2.Distance(transform.position, burger.transform.position);
+
+            if (dist < 0.01f)
             {
-                gameObject.SetActive(false);
-                timer = 0f;
-                isSpawned = false;
+                Debug.Log("bounce");
+                burger.GetComponent<spawn_kotlet>().Bounce();
+            }
+            else
+            {
+                burger.gameObject.transform.position = Vector3.MoveTowards(burger.transform.position, transform.position, speed * Time.deltaTime);
             }
         }
     }
