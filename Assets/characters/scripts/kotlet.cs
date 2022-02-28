@@ -24,30 +24,23 @@ public class kotlet : MonoBehaviour
     {
         if (collision.gameObject.name == "PlayerPrefab")
         {
-            Debug.Log("gfhusfdgh");
             vectorDifference = collision.gameObject.transform.position - transform.position;
             collisionSide = vectorDifference.normalized;
             burger = collision.gameObject;
             burger.GetComponent<spawn_kotlet>().isOnKotlet = true;
             if (collisionSide.x == -1.0f || collisionSide.x == 1.0f)
             {
+                Debug.Log("side");
                 sideHit = true;
                 burger.GetComponent<burgier_movement>().enabled = false;
             }
-            else if(collisionSide.y > 0.5f)
+            else
+            {
                 burger.GetComponent<spawn_kotlet>().Bounce();
+                Debug.Log("not side");
+            }
         }
     }
-    /*public void Bounce()
-    {
-        burger.GetComponent<burgier_movement>().enabled = true;
-        sideHit = false;
-        //dodanie gornego velocity
-        burger.GetComponent<Rigidbody2D>().velocity = transform.up * jumpVelocity;
-        //odpalenie animacji skoku i wylaczenie animacji chodzenia
-        anim.SetTrigger("jump");
-        anim.SetBool("isWalking", false);
-    }*/
     void Update()
     {
         if (sideHit)
