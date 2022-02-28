@@ -150,7 +150,7 @@ public class burgier_movement : MonoBehaviour
             if(rb.velocity.y < 0)
             {
                 rb.gravityScale = gravity * fallMultiplier;
-            } else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space) && !kotlet.GetComponent<kotlet>().isOnKotlet)
+            } else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space) && gameObject.GetComponent<spawn_kotlet>().isOnKotlet)
             {
                 rb.gravityScale = gravity * (fallMultiplier / 2);
             }
@@ -171,7 +171,7 @@ public class burgier_movement : MonoBehaviour
         {
             if (ser.GetComponent<ser>().cheesed)
             {
-                kotlet.GetComponent<kotlet>().isOnKotlet = false;
+                gameObject.GetComponent<spawn_kotlet>().isOnKotlet = false;
                 return true;
             }
             else 
@@ -181,7 +181,7 @@ public class burgier_movement : MonoBehaviour
         }
         else 
         {
-            kotlet.GetComponent<kotlet>().isOnKotlet = false;
+            gameObject.GetComponent<spawn_kotlet>().isOnKotlet = false;
             return true;
         }
     }
